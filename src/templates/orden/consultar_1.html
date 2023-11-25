@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../static/css/consultar.css">
+    <title>Registros ordenes de trabajo</title>
+    <script src="https://kit.fontawesome.com/82559006af.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="volver">
+        <a href="../inicio.html">
+            <i class="fa-solid fa-arrow-left" style="color: #ffffff;"></i>
+        </a>
+    </div>
+    <div class="titulo">
+        <p> Gestión ordenes de trabajo </p>
+    </div>
+    <div class="container">
+        <form method="POST" action="/ORDEN.consultar">
+            <div class="search" name="Buscar">
+                <input type="text" name="txtBuscar" placeholder="Buscar">
+                <div class="btn">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </div>
+            </div>
+        </form>
+        <table class="table_usu">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Placa</th>
+                    <th>Descripción</th>
+                    <th>Radio</th>
+                    <th>Antena</th>
+                    <th>Encendedor</th>
+                    <th>Tapetes</th>
+                    <th>Soat</th>
+                    <th>Grua</th>
+                    <th>Estado de llantas</th>
+                    <th>Llave de pernos </th>
+                    <th>Llanta de repuesto</th>
+                    <th>Tapa de gasolina </th>
+                    <th>Herramientas</th>
+                    <th>Kit de carretera</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody class="datos">
+                {% if orden %}
+                    {% for orden_item in orden %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td>{{ orden_item.placa }}</td>
+                            <td>{{ orden_item.descripcion }}</td>
+                            <td>{{ orden_item.radio }}</td>
+                            <td>{{ orden_item.antena }}</td>
+                            <td>{{ orden_item.encendedor }}</td>
+                            <td>{{ orden_item.tapetes }}</td>
+                            <td>{{ orden_item.soat }}</td>
+                            <td>{{ orden_item.grua }}</td>
+                            <td>{{ orden_item.estado_llantas }}</td>
+                            <td>{{ orden_item.llave_pernos }}</td>
+                            <td>{{ orden_item.llanta_repuesto }}</td>
+                            <td>{{ orden_item.tapa_gasolina }}</td>
+                            <td>{{ orden_item.herramientas }}</td>
+                            <td>{{ orden_item.kit_carretera }}</td>
+                            <td>
+                                <div class="direct"> 
+                                    <a href="/ORDEN.editar_orden/{{ orden_item.id_orden }}">
+                                        <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i>
+                                    </a>
+                                </div> 
+                            </td> 
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="17">No se encontraron resultados</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+        <a href="/ORDEN.registrarorden">
+            <button class="registro">Crear Orden</button> 
+        </a>
+    </div>
+</body>
+</html>
